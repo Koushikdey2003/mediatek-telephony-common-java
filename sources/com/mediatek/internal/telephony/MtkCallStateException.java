@@ -1,0 +1,8 @@
+package com.mediatek.internal.telephony;
+
+import com.android.internal.telephony.CallStateException;
+
+/* JADX INFO: loaded from: classes.dex */
+public class MtkCallStateException extends CallStateException {
+    public static final int ERROR_INVALID_DURING_SRVCC = 3;
+}

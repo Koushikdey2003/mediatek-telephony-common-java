@@ -1,0 +1,119 @@
+package vendor.mediatek.hardware.mtkradioex.data;
+
+import android.os.BadParcelableException;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+/* JADX INFO: loaded from: classes.dex */
+public class Tft implements Parcelable {
+    public static final Parcelable.Creator<Tft> CREATOR = new Parcelable.Creator<Tft>() { // from class: vendor.mediatek.hardware.mtkradioex.data.Tft.1
+        @Override // android.os.Parcelable.Creator
+        public Tft createFromParcel(Parcel _aidl_source) {
+            Tft _aidl_out = new Tft();
+            _aidl_out.readFromParcel(_aidl_source);
+            return _aidl_out;
+        }
+
+        @Override // android.os.Parcelable.Creator
+        public Tft[] newArray(int _aidl_size) {
+            return new Tft[_aidl_size];
+        }
+    };
+    public PktFilter[] pfList;
+    public TftParameter tftParameter;
+    public int operation = 0;
+    public int pfNumber = 0;
+
+    public final int getStability() {
+        return 1;
+    }
+
+    @Override // android.os.Parcelable
+    public final void writeToParcel(Parcel _aidl_parcel, int _aidl_flag) {
+        int _aidl_start_pos = _aidl_parcel.dataPosition();
+        _aidl_parcel.writeInt(0);
+        _aidl_parcel.writeInt(this.operation);
+        _aidl_parcel.writeInt(this.pfNumber);
+        _aidl_parcel.writeTypedArray(this.pfList, _aidl_flag);
+        _aidl_parcel.writeTypedObject(this.tftParameter, _aidl_flag);
+        int _aidl_end_pos = _aidl_parcel.dataPosition();
+        _aidl_parcel.setDataPosition(_aidl_start_pos);
+        _aidl_parcel.writeInt(_aidl_end_pos - _aidl_start_pos);
+        _aidl_parcel.setDataPosition(_aidl_end_pos);
+    }
+
+    public final void readFromParcel(Parcel _aidl_parcel) {
+        int _aidl_start_pos = _aidl_parcel.dataPosition();
+        int _aidl_parcelable_size = _aidl_parcel.readInt();
+        try {
+            if (_aidl_parcelable_size < 4) {
+                throw new BadParcelableException("Parcelable too small");
+            }
+            if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
+                if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
+                    throw new BadParcelableException("Overflow in the size of parcelable");
+                }
+                _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
+                return;
+            }
+            this.operation = _aidl_parcel.readInt();
+            if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
+                if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
+                    throw new BadParcelableException("Overflow in the size of parcelable");
+                }
+                _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
+                return;
+            }
+            this.pfNumber = _aidl_parcel.readInt();
+            if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
+                if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
+                    throw new BadParcelableException("Overflow in the size of parcelable");
+                }
+                _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
+                return;
+            }
+            this.pfList = (PktFilter[]) _aidl_parcel.createTypedArray(PktFilter.CREATOR);
+            if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
+                if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
+                    throw new BadParcelableException("Overflow in the size of parcelable");
+                }
+                _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
+            } else {
+                this.tftParameter = (TftParameter) _aidl_parcel.readTypedObject(TftParameter.CREATOR);
+                if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
+                    throw new BadParcelableException("Overflow in the size of parcelable");
+                }
+                _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
+            }
+        } catch (Throwable th) {
+            if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
+                throw new BadParcelableException("Overflow in the size of parcelable");
+            }
+            _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
+            throw th;
+        }
+    }
+
+    @Override // android.os.Parcelable
+    public int describeContents() {
+        int _mask = 0 | describeContents(this.pfList);
+        return _mask | describeContents(this.tftParameter);
+    }
+
+    private int describeContents(Object _v) {
+        if (_v == null) {
+            return 0;
+        }
+        if (_v instanceof Object[]) {
+            int _mask = 0;
+            for (Object o : (Object[]) _v) {
+                _mask |= describeContents(o);
+            }
+            return _mask;
+        }
+        if (!(_v instanceof Parcelable)) {
+            return 0;
+        }
+        return ((Parcelable) _v).describeContents();
+    }
+}
